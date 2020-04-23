@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Show Product";
+}
+
+@model Product
+
+<h1><a href="/">Products</a> | <a href="/Catagory">Categories</a></h1>
+<div class="m-3 jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">@ViewBag.this_product.Name</h1>
+        <p class="lead">@ViewBag.this_product.Description</p>
+        <hr class="my-2">
+        <p></p>
+        <p class="lead">
+            <a class="float-left btn btn-success btn-md" href="/" role="button">back</a>
+        </p>
+    </div>
+</div>
+<div class="m-2 row justify-content-between">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">Categories:</div>
+                <ul class="list-group list-group-flush">
+                    @foreach( var c in Model.Categories)
+                    {
+                        <li class="list-group-item" >@c.CategoryofProduct.Name
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+<div class="col-4">
+                <div class="card">
+                    <div class="card-header">Add Category:</div>
+                    <div class="card-body">
+                        <form class="form-inline" action="/AddProdAsso/@Model.ProductId" method="post">
+                            <select class="form-control col mr-sm-2" name="catid">
+                                
+                                @foreach(var n in ViewBag.Unassociated){
+                                    {
+                                        <option value="@n.CategoryId">@n.Name</option>
+                                    }
+                                }
+                            </select>
+                            <br>
+                            </br>
+                            <input type="submit"  value="Add Category" class="btn btn-md btn-success">
+                        </form>
+                    </div>
+                    </div>
+            </div>
+        </div>
